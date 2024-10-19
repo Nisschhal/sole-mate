@@ -20,7 +20,7 @@ const Orders = () => {
       {/* CARD with Header and Table as Content */}
 
       <CardHeader className="">
-        <CardTitle className="text-2xl font-bold">Orders</CardTitle>
+        <CardTitle className="text-2xl font-bold ">Orders</CardTitle>
         <CardDescription className="text-base ">
           Recent orders from your store!
         </CardDescription>
