@@ -13,3 +13,4 @@ SoleMate is an e-commerce platform designed exclusively for shoe lovers. Discove
 - **TailwindCSS**: For Styling
 - **Shadcn/ui (library)**: For Components
   - Dependencis: lucide-react
+- **Kinde Auth**: For authentication process
