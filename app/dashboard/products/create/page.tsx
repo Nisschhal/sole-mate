@@ -1,8 +1,11 @@
+"use client";
+import { UploadDropzone } from "@/app/lib/uploadthing";
 import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -19,6 +22,7 @@ import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { ArrowLeft, ChevronLeft } from "lucide-react";
 import Link from "next/link";
+import toast from "react-hot-toast";
 
 const CreateProduct = () => {
   return (
@@ -82,8 +86,27 @@ const CreateProduct = () => {
                 </SelectContent>
               </Select>
             </div>
+            {/* Image Upload   */}
+            <div className="flex flex-col gap-3">
+              <Label>Images</Label>
+
+              <UploadDropzone
+                endpoint="imageUploader"
+                onClientUploadComplete={() => {
+                  // Do something with the response
+                  toast.success("Image Uploaded Successfully!");
+                }}
+                onUploadError={() => {
+                  // Do something with the error.
+                  toast.error("Failed to Upload Image!");
+                }}
+              />
+            </div>
           </div>
         </CardContent>
+        <CardFooter>
+          <Button>Create Product</Button>
+        </CardFooter>
       </Card>
     </form>
   );
