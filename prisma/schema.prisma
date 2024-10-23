@@ -14,6 +14,8 @@ datasource db {
 }
 
 // Models
+
+// User
 model User {
   id           String @id @unique
   email        String
@@ -22,5 +24,31 @@ model User {
   profileImage String
 
   createdAt DateTime @default(now())
-  
+}
+
+// Product
+model Product {
+  id          String        @id @unique
+  name        String
+  description String
+  status      ProductStatus
+  price       Int
+  images      String[]
+  category    Category
+  isFeatured  Boolean       @default(false)
+  createdAt   DateTime      @default(now())
+}
+
+// ProductStatus enum: draft || published || archived
+enum ProductStatus {
+  draft
+  published
+  archived
+}
+
+// Category enum: men women kids
+enum Category {
+  men
+  women
+  kids
 }

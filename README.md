@@ -17,6 +17,7 @@ SoleMate is an e-commerce platform designed exclusively for shoe lovers. Discove
 - **React Hot Toast**: For toast infos, such as image upload successfully or Failed!
 - **Neon**: For serveless postgresSQL
 - **Prisma**: For Object Relation Mapping(ORM)
+- **Vercel/avatar**: For default user profile
 
 # Implementations
 
@@ -72,12 +73,30 @@ SoleMate is an e-commerce platform designed exclusively for shoe lovers. Discove
 - Paste the DATABASE_URL from the Neon --> Prisma(.env)
 - Create required models in built file prisma/schema.prisma
 - Push Schema to db neon: `npx prisma db push`
+-
 
 ### Model Creation
 
 - Create `api/auth/creation/route.js` for Models creation
 - Error might occur while using **Prisma** from `@prisma/client` follow _https://www.prisma.io/docs/orm/more/help-and-troubleshooting/help-articles/nextjs-prisma-client-dev-practices_
-- create a model in the file
+- create a model in the file and specify the api route: `/api/auth/creation` to save the user to db as kinde auth looks for KINDE_POST_LOGIN_REDIRECT_URL in .env file to redirect after login
+
+## Server Action for Validation
+
+- Create an `app/actions.ts` to create server actions: **createProducts** to do data validation
+- **zod** for enforcing/creating constraints for incoming data
+  - app/lib/zodSchema.ts: defined the requirement constraints for models
+- **conform** for validating the enforced constraints:: follow conform.guide --> tutorial && parseWithZod for implementation details
+- use the _**parseWithZod(formData, {schema: zodProductSchema})**_
+- pass the submission.reply() to catch on **useFormState() for next 14** but **useActionState() for next 15** which do same work
+-
+
+## Client side Validation using zod
+
+- using useFormState() to get the previous state and server actions
+- useForm() from **@conform-to/react** for form fleids control
+
+_Note: make sure to use image.imagePattern in next.config.mjs file to make sure your image accept utf.io hostname_
 
 #### Learning Outcome:
 
