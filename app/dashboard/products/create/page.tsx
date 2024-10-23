@@ -30,6 +30,7 @@ import { parseWithZod } from "@conform-to/zod";
 import { productSchema } from "@/app/lib/zodSchema";
 import { useState } from "react";
 import Image from "next/image";
+import { categories } from "@/app/lib/categories";
 
 const CreateProduct = () => {
   // Image Storage
@@ -137,15 +138,42 @@ const CreateProduct = () => {
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="draft">Draft</SelectItem>
-                  <SelectItem value="publish">Publish</SelectItem>
-                  <SelectItem value="archive">Archive</SelectItem>
+                  <SelectItem value="published">Publish</SelectItem>
+                  <SelectItem value="archived">Archive</SelectItem>
                 </SelectContent>
               </Select>
               <p className="text-red-500">{fields.status.errors}</p>
             </div>
+            {/* Category  */}
+            <div className="flex flex-col gap-3">
+              <Label className="text-lg">Category</Label>
+              <Select
+                key={fields.category.key}
+                name={fields.category.name}
+                defaultValue={fields.category.initialValue}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Select Category" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="men">Men</SelectItem>
+                  <SelectItem value="women">Women</SelectItem>
+                  <SelectItem value="kids">Kids</SelectItem>
+                </SelectContent>
+              </Select>
+              <p className="text-red-500">{fields.category.errors}</p>
+            </div>
+
             {/* Image Upload   */}
             <div className="flex flex-col gap-3">
               <Label>Images</Label>
+              <input
+                type="hidden"
+                value={images}
+                key={fields.images.key}
+                name={fields.images.name}
+                defaultValue={fields.images.initialValue as any}
+              />
 
               {/*  Uploadthing Component */}
               {images.length > 0 ? (
@@ -182,6 +210,7 @@ const CreateProduct = () => {
                   }}
                 />
               )}
+              <p className="text-red-500">{fields.images.errors}</p>
             </div>
           </div>
         </CardContent>

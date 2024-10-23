@@ -3,6 +3,8 @@ import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { redirect } from "next/navigation";
 import { parseWithZod } from "@conform-to/zod";
 import { productSchema } from "./lib/zodSchema";
+import prisma from "./lib/db";
+import { v4 as uuidv4 } from "uuid"; // Import UUID library
 
 // server createProduct function to pass at useFormState()
 export async function createProduct(prevState: unknown, formData: FormData) {
@@ -23,4 +25,20 @@ export async function createProduct(prevState: unknown, formData: FormData) {
   if (submission.status !== "success") {
     return submission.reply();
   }
+
+  // upload the form data to db server
+  await prisma.product.create({
+    data: {
+      id: uuidv4(),
+      name: submission.value.name,
+      description: submission.value.description,
+      status: submission.value.status,
+      price: submission.value.price,
+      images: submission.value.images,
+      category: submission.value.category,
+      isFeatured: submission.value.isFeatured,
+    },
+  });
+
+  redirect("/dashboard/products");
 }
