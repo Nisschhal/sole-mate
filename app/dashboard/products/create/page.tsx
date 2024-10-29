@@ -30,6 +30,7 @@ import { parseWithZod } from "@conform-to/zod";
 import { productSchema } from "@/app/lib/zodSchema";
 import { useState } from "react";
 import Image from "next/image";
+import SubmitButtons from "@/app/components/SubmitButtons";
 
 const CreateProduct = () => {
   // Image Storage
@@ -215,7 +216,7 @@ const CreateProduct = () => {
         </CardContent>
         {/* Footer for ** Submit** Button  */}
         <CardFooter>
-          <Button>Create Product</Button>
+          <SubmitButtons />
         </CardFooter>
       </Card>
     </form>
