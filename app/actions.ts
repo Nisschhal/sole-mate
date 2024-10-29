@@ -26,6 +26,11 @@ export async function createProduct(prevState: unknown, formData: FormData) {
     return submission.reply();
   }
 
+  // flatten the incoming string of imageUrl from uploadthing
+  const flattenUrls = submission.value.images.flatMap((urlString) =>
+    urlString.split(",").map((url) => url.trim())
+  );
+
   // upload the form data to db server
   await prisma.product.create({
     data: {
@@ -34,7 +39,7 @@ export async function createProduct(prevState: unknown, formData: FormData) {
       description: submission.value.description,
       status: submission.value.status,
       price: submission.value.price,
-      images: submission.value.images,
+      images: flattenUrls,
       category: submission.value.category,
       isFeatured: submission.value.isFeatured,
     },

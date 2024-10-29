@@ -73,7 +73,7 @@ SoleMate is an e-commerce platform designed exclusively for shoe lovers. Discove
 - Paste the DATABASE_URL from the Neon --> Prisma(.env)
 - Create required models in built file prisma/schema.prisma
 - Push Schema to db neon: `npx prisma db push`
--
+- To run local studio: `npx prisma studio`
 
 ### Model Creation
 

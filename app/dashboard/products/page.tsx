@@ -72,7 +72,7 @@ const Products = () => {
                 <TableCell className="text-end">
                   <DropdownMenu>
                     <DropdownMenuTrigger>
-                      <Button size="icon" variant="ghost">
+                      <Button size="icon" variant="ghost" asChild>
                         <MoreHorizontalIcon className="size-4" />
                       </Button>
                     </DropdownMenuTrigger>

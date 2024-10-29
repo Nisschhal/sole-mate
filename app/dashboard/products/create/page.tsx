@@ -30,7 +30,6 @@ import { parseWithZod } from "@conform-to/zod";
 import { productSchema } from "@/app/lib/zodSchema";
 import { useState } from "react";
 import Image from "next/image";
-import { categories } from "@/app/lib/categories";
 
 const CreateProduct = () => {
   // Image Storage
