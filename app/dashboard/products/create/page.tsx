@@ -216,7 +216,7 @@ const CreateProduct = () => {
         </CardContent>
         {/* Footer for ** Submit** Button  */}
         <CardFooter>
-          <SubmitButtons />
+          <SubmitButtons text="Create Product" />
         </CardFooter>
       </Card>
     </form>

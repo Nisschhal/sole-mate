@@ -81,6 +81,8 @@ SoleMate is an e-commerce platform designed exclusively for shoe lovers. Discove
 - Error might occur while using **Prisma** from `@prisma/client` follow _https://www.prisma.io/docs/orm/more/help-and-troubleshooting/help-articles/nextjs-prisma-client-dev-practices_
 - create a model in the file and specify the api route: `/api/auth/creation` to save the user to db as kinde auth looks for KINDE_POST_LOGIN_REDIRECT_URL in .env file to redirect after login
 
+**_Note: while importing `primsa` for CRUD don't import from `@prima/client` import from `@app/lib/db.ts`_**
+
 ## Server Action for Validation
 
 - Create an `app/actions.ts` to create server actions: **createProducts** to do data validation
