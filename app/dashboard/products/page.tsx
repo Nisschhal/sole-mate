@@ -118,7 +118,10 @@ const Products = async () => {
                             </Link>
                           </DropdownMenuItem>
                           <DropdownMenuItem asChild>
-                            <ProductDeleteAlert productId={product.id} />
+                            <ProductDeleteAlert
+                              id={product.id}
+                              deleteType="product"
+                            />
                           </DropdownMenuItem>
                         </DropdownMenuContent>
                       </DropdownMenu>

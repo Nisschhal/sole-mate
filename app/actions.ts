@@ -2,7 +2,7 @@
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { redirect } from "next/navigation";
 import { parseWithZod } from "@conform-to/zod";
-import { productSchema } from "./lib/zodSchema";
+import { bannerSchema, productSchema } from "./lib/zodSchema";
 import prisma from "./lib/db";
 import { v4 as uuidv4 } from "uuid"; // Import UUID library
 
@@ -66,7 +66,7 @@ export async function editProduct(_: unknown, formData: FormData) {
   if (submission.status !== "success") return submission.reply();
 
   // get the productId from formData
-  const productId = formData.get("productId") as string;
+  const productId = formData.get("id") as string;
   console.log("form data", formData);
 
   // flatten the incoming string of imageUrl from uploadthing
@@ -103,7 +103,7 @@ export async function deleteProduct(formData: FormData) {
   }
 
   // get the productId from formData
-  const productId = formData.get("productId") as string;
+  const productId = formData.get("id") as string;
   console.log("clidked");
   // update the product with given formdata
   await prisma.product.delete({
@@ -113,4 +113,52 @@ export async function deleteProduct(formData: FormData) {
   });
 
   redirect("/dashboard/products");
+}
+
+// Create Banner
+export async function createBanner(_: unknown, formData: FormData) {
+  const { getUser } = getKindeServerSession();
+  const user = getUser();
+
+  if (!user) return redirect("/");
+
+  // validate formdata
+  const submission = parseWithZod(formData, { schema: bannerSchema });
+
+  if (submission.status !== "success") {
+    return submission.reply();
+  }
+
+  // store the banner
+  await prisma.banner.create({
+    data: {
+      title: submission.value.title,
+      imageString: submission.value.imageString,
+    },
+  });
+
+  redirect("/dashboard/banner");
+}
+
+// delete banner  action
+export async function deleteBanner(formData: FormData) {
+  const { getUser } = getKindeServerSession();
+  const user = await getUser();
+
+  // if there is no user who has entered then redirect to homepage
+  if (!user) {
+    return redirect("/");
+  }
+
+  // get the bannerId from formData
+  const bannerId = formData.get("id") as string;
+  console.log("clidked");
+  // update the product with given formdata
+  await prisma.banner.delete({
+    where: {
+      id: bannerId,
+    },
+  });
+
+  redirect("/dashboard/banner");
 }
