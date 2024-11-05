@@ -1,13 +1,15 @@
 import React, { ReactNode } from "react";
-import { Navbar } from "./Navbar";
+import { Navbar } from "../components/storeFront/Navbar";
+// import { Navbar } from "./Navbar";
 
-const layout = ({ children }: { children: ReactNode }) => {
+const StoreFrontLayout = ({ children }: { children: ReactNode }) => {
   return (
-    <div>
+    <>
+      {/* <Navbar /> */}
       <Navbar />
-      <main>{children}</main>
-    </div>
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">{children}</main>
+    </>
   );
 };
 
-export default layout;
+export default StoreFrontLayout;
