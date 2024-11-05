@@ -156,9 +156,9 @@ const CreateProduct = () => {
                   <SelectValue placeholder="Select Category" />
                 </SelectTrigger>
                 <SelectContent>
+                  <SelectItem value="kids">Kids</SelectItem>
                   <SelectItem value="men">Men</SelectItem>
                   <SelectItem value="women">Women</SelectItem>
-                  <SelectItem value="kids">Kids</SelectItem>
                 </SelectContent>
               </Select>
               <p className="text-red-500">{fields.category.errors}</p>
@@ -206,7 +206,9 @@ const CreateProduct = () => {
                   }}
                   onUploadError={() => {
                     // Do something with the error.
-                    toast.error("Failed to Upload Image!");
+                    toast.error(
+                      "Failed to Upload Image! /n Due to Server Hibernation, please try 4-5 times to awake :)"
+                    );
                   }}
                 />
               )}

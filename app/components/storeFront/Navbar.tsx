@@ -48,7 +48,7 @@ export async function Navbar() {
               <LoginLink>Sign in</LoginLink>
             </Button>
             <span className="h-6 w-px bg-gray-200"> </span>
-            <Button variant={"secondary"} asChild>
+            <Button variant={"ghost"} asChild>
               <RegisterLink>Create Account</RegisterLink>
             </Button>
           </div>

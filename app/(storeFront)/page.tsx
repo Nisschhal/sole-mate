@@ -1,4 +1,5 @@
 import { CategoriesSelection } from "../components/storeFront/CategoriesSelection";
+import FeaturedProducts from "../components/storeFront/FeaturedProducts";
 import Hero from "../components/storeFront/Hero";
 
 const IndexPage = () => {
@@ -6,6 +7,7 @@ const IndexPage = () => {
     <div>
       <Hero />
       <CategoriesSelection />
+      <FeaturedProducts />
     </div>
   );
 };
