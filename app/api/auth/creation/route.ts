@@ -33,5 +33,5 @@ export async function GET() {
   }
 
   // return to the given url, url must be absolute path
-  return NextResponse.redirect("http://localhost:3000/dashboard");
+  return NextResponse.redirect("http://localhost:3000");
 }
