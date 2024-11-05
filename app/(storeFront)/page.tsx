@@ -1,5 +1,11 @@
+import Hero from "../components/storeFront/Hero";
+
 const IndexPage = () => {
-  return <div>IndexPage</div>;
+  return (
+    <div>
+      <Hero />
+    </div>
+  );
 };
 
 export default IndexPage;
