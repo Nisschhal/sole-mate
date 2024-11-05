@@ -22,7 +22,6 @@ async function getData() {
 
 export default async function FeaturedProducts() {
   const featuredProducts = await getData();
-  console.log("wokring", featuredProducts);
   return (
     <>
       <h1 className="text-2xl font-extrabold tracking-tight ">
