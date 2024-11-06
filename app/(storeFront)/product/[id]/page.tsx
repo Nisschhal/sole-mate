@@ -4,7 +4,6 @@ import prisma from "@/app/lib/db";
 import { Button } from "@/components/ui/button";
 import { ShoppingBag, StarIcon } from "lucide-react";
 import { notFound } from "next/navigation";
-import { date } from "zod";
 
 async function getData(productId: string) {
   const data = await prisma.product.findUnique({
