@@ -5,6 +5,9 @@ import { parseWithZod } from "@conform-to/zod";
 import { bannerSchema, productSchema } from "./lib/zodSchema";
 import prisma from "./lib/db";
 import { v4 as uuidv4 } from "uuid"; // Import UUID library
+import { redis } from "./lib/redis";
+import { Cart } from "./lib/interfaces";
+import { revalidatePath } from "next/cache";
 
 // server createProduct function to pass at useFormState()
 export async function createProduct(prevState: unknown, formData: FormData) {
@@ -161,4 +164,82 @@ export async function deleteBanner(formData: FormData) {
   });
 
   redirect("/dashboard/banner");
+}
+
+// CART ADD ITEM
+export async function addItem(productId: string) {
+  // if no user, redirect to indexpage
+  const { getUser } = getKindeServerSession();
+  const user = await getUser();
+
+  if (!user) {
+    return redirect("/");
+  }
+  // get the cart with specific id
+  const cart: Cart | null = await redis.get(`cart-${user.id}`);
+
+  // get the productbyId from the db to add into cart
+  const selectedProduct = await prisma.product.findUnique({
+    where: {
+      id: productId,
+    },
+    select: {
+      id: true,
+      name: true,
+      price: true,
+      images: true,
+    },
+  });
+
+  // if there isn ot such product throw error "No product with that id"
+  if (!selectedProduct) throw new Error("No product with this id!");
+
+  // create empty cart for new cart
+  let myCart = {} as Cart;
+
+  // if there is no cart with specified userId create new one
+  if (!cart || !cart.items) {
+    myCart = {
+      userId: user.id,
+      items: [
+        {
+          id: selectedProduct.id,
+          price: selectedProduct.price,
+          imageString: selectedProduct.images[0],
+          name: selectedProduct.name,
+          quantity: 1,
+        },
+      ],
+    };
+  } else {
+    // if there is already cart then just increase the quantity by 1
+    let itemFound = false;
+
+    myCart.items = cart.items.map((item) => {
+      if (item.id === productId) {
+        itemFound = true;
+        item.quantity += 1;
+      }
+
+      return item;
+    });
+
+    // there is cart but not that item in it than add new item {} into cart
+    if (!itemFound) {
+      myCart.items.push({
+        id: selectedProduct.id,
+        imageString: selectedProduct.images[0],
+        name: selectedProduct.name,
+        price: selectedProduct.price,
+        quantity: 1,
+      });
+    }
+  }
+
+  // push the new or updated cart item to redis
+  await redis.set(`cart-${user.id}`, myCart);
+
+  // next.js caches and provide previous data to frontend when re-fetched so, revalidate the cache to get up-to-date value
+  // revalidate the indexpage layout
+  revalidatePath("/", "layout");
 }

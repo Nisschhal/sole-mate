@@ -8,11 +8,17 @@ import {
 import { ShoppingBagIcon } from "lucide-react";
 import { UserDropdown } from "./UserDropdown";
 import { Button } from "@/components/ui/button";
+import { redis } from "@/app/lib/redis";
+import { Cart } from "@/app/lib/interfaces";
 
 export async function Navbar() {
   // get the user
   const { getUser } = getKindeServerSession();
   const user = await getUser();
+
+  const cart: Cart = await redis.get(`cart-${user.id}`);
+
+  const totalQuanity = cart.items.reduce((acc, item) => item.quantity + acc, 0);
 
   return (
     <div className="w-full max-w-7xl mx-auto sm:px-6 lg:px-8 py-5 flex items-center justify-between">
@@ -31,7 +37,9 @@ export async function Navbar() {
           <>
             <Link href={"/bag"} className="group p-2 flex items-center mr-2">
               <ShoppingBagIcon className="size-6 text-gray-400 group-hover:text-gray-500" />
-              <span className="ml-2 text-sm font-medium text-gray-700">5</span>
+              <span className="ml-1 text-sm font-medium text-gray-700">
+                {totalQuanity}
+              </span>
             </Link>
 
             <UserDropdown

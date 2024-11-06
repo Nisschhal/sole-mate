@@ -18,6 +18,7 @@ SoleMate is an e-commerce platform designed exclusively for shoe lovers. Discove
 - **Neon**: For serveless postgresSQL
 - **Prisma**: For Object Relation Mapping(ORM)
 - **Vercel/avatar**: For default user profile
+- **upstash with Redis**: For Serverless Cart Database
 
 # Implementations
 
@@ -100,7 +101,15 @@ SoleMate is an e-commerce platform designed exclusively for shoe lovers. Discove
 
 _Note: make sure to use image.imagePattern in next.config.mjs file to make sure your image accept utf.io hostname_
 
+### CRUD Operations
+
+- Products Creations
+- Product Fetch via Category: All, Men, Women, Kids
+- Product Update
+- Product Delete and Edit via productId, attched to nextjs FormData
+
 #### Learning Outcome:
 
 - Able to customize shadcn theme for custom requirement
 - Uploadthing for next.js
+- PostgreSQL
