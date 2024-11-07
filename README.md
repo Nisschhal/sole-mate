@@ -109,6 +109,11 @@ _Note: make sure to use image.imagePattern in next.config.mjs file to make sure 
 - Product Update
 - Product Delete and Edit via productId, attched to nextjs FormData
 
+### Stripe Implementation
+
+- Create an app/lib/stripe for stripe api key, verstion and typescript
+-
+
 #### Learning Outcome:
 
 - Able to customize shadcn theme for custom requirement

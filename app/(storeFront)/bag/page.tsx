@@ -7,8 +7,9 @@ import { Cart } from "@/app/lib/interfaces";
 import { redis } from "@/app/lib/redis";
 import { Button } from "@/components/ui/button";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
-import { Link, ShoppingBag } from "lucide-react";
+import { ShoppingBag } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 
 export default async function BagRoute() {
@@ -32,7 +33,7 @@ export default async function BagRoute() {
 
   return (
     <div className="max-w-2xl mx-auto mt-10 min-h-[55vh]">
-      {cart?.items.length === 0 ? (
+      {!cart || !cart.items ? (
         <div className="flex min-h-[440px] flex-col items-center justify-center rounded-lg border border-dashed p-8 text-center mt-20">
           <div className="flex size-20 items-center justify-center rounded-full bg-primary/10">
             <ShoppingBag className="size-10 text-primary" />
