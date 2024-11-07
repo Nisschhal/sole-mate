@@ -1,5 +1,8 @@
-import { deleteItem } from "@/app/actions";
-import { DeleteItemButton } from "@/app/components/SubmitButtons";
+import { checkOut, deleteItem } from "@/app/actions";
+import {
+  CheckoutButton,
+  DeleteItemButton,
+} from "@/app/components/SubmitButtons";
 import { Cart } from "@/app/lib/interfaces";
 import { redis } from "@/app/lib/redis";
 import { Button } from "@/components/ui/button";
@@ -88,9 +91,9 @@ export default async function BagRoute() {
               </p>
             </div>
             {/* Chckout button */}
-            <Button className="w-full mt-5" size={"lg"}>
-              Checkout
-            </Button>
+            <form action={checkOut}>
+              <CheckoutButton />
+            </form>
           </div>
         </div>
       )}

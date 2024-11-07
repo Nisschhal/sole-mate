@@ -8,6 +8,8 @@ import { v4 as uuidv4 } from "uuid"; // Import UUID library
 import { redis } from "./lib/redis";
 import { Cart } from "./lib/interfaces";
 import { revalidatePath } from "next/cache";
+import { stripe } from "./lib/stripte";
+import Stripe from "stripe";
 
 // server createProduct function to pass at useFormState()
 export async function createProduct(prevState: unknown, formData: FormData) {
@@ -270,4 +272,40 @@ export async function deleteItem(formData: FormData) {
   }
 
   revalidatePath("/bag");
+}
+
+//Checkout Process
+export async function checkOut() {
+  const { getUser } = getKindeServerSession();
+  const user = await getUser();
+
+  if (!user) {
+    return redirect("/");
+  }
+
+  const cart: Cart | null = await redis.get(`cart-${user.id}`);
+
+  if (cart && cart.items) {
+    const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] =
+      cart.items.map((item) => ({
+        price_data: {
+          currency: "usd",
+          unit_amount: item.price * 100, // in Cents
+          product_data: {
+            name: item.name,
+            images: [item.imageString],
+          },
+        },
+        quantity: item.quantity,
+      }));
+
+    const session = await stripe.checkout.sessions.create({
+      mode: "payment",
+      line_items: lineItems,
+      success_url: "http://localhost:3000/payment/success",
+      cancel_url: "http://localhost:3000/payment/cancel",
+    });
+
+    return redirect(session.url as string);
+  }
 }

@@ -19,6 +19,7 @@ SoleMate is an e-commerce platform designed exclusively for shoe lovers. Discove
 - **Prisma**: For Object Relation Mapping(ORM)
 - **Vercel/avatar**: For default user profile
 - **upstash with Redis**: For Serverless Cart Database
+- **Stripe** : For payent process
 
 # Implementations
 
