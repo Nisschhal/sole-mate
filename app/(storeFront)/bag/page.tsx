@@ -4,6 +4,7 @@ import { Cart } from "@/app/lib/interfaces";
 import { redis } from "@/app/lib/redis";
 import { Button } from "@/components/ui/button";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { Link, ShoppingBag } from "lucide-react";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 
@@ -29,8 +30,22 @@ export default async function BagRoute() {
   return (
     <div className="max-w-2xl mx-auto mt-10 min-h-[55vh]">
       {cart?.items.length === 0 ? (
-        <div>
-          <h1>Nothing in the Shopping Bag!</h1>
+        <div className="flex min-h-[440px] flex-col items-center justify-center rounded-lg border border-dashed p-8 text-center mt-20">
+          <div className="flex size-20 items-center justify-center rounded-full bg-primary/10">
+            <ShoppingBag className="size-10 text-primary" />
+          </div>
+
+          <h2 className="mt-6 text-xl font-semibol">
+            You don't have any products
+          </h2>
+          <p className="mb-8 mt-2 text-center text-sm leading-6 text-muted-foreground max-w-sm mx-auto">
+            You currently don't have any product in shopping bag. Please add
+            some so that you can see them right here
+          </p>
+
+          <Button asChild>
+            <Link href="/">Shop Now</Link>
+          </Button>
         </div>
       ) : (
         <div className="flex flex-col gap-y-10">
