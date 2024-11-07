@@ -243,3 +243,31 @@ export async function addItem(productId: string) {
   // revalidate the indexpage layout
   revalidatePath("/", "layout");
 }
+
+// Delete Cart Item
+export async function deleteItem(formData: FormData) {
+  // if no user, redirect to indexpage
+  const { getUser } = getKindeServerSession();
+  const user = await getUser();
+
+  if (!user) {
+    return redirect("/");
+  }
+  // get the productbyId to find that particular item
+  const productId = formData.get("productId");
+
+  // get the cart with specific id
+  const cart: Cart | null = await redis.get(`cart-${user.id}`);
+
+  if (cart && cart.items) {
+    const updatedCart = {
+      userId: user.id,
+      items: cart.items.filter((item) => item.id !== productId),
+    };
+    const res = await redis.set(`cart-${user.id}`, updatedCart);
+
+    console.log(res);
+  }
+
+  revalidatePath("/bag");
+}

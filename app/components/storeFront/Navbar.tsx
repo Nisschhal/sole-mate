@@ -12,13 +12,15 @@ import { redis } from "@/app/lib/redis";
 import { Cart } from "@/app/lib/interfaces";
 
 export async function Navbar() {
-  // get the user
+  // get the user and get the cart from that user, if there is any
   const { getUser } = getKindeServerSession();
   const user = await getUser();
-
-  const cart: Cart = await redis.get(`cart-${user.id}`);
-
-  const totalQuanity = cart.items.reduce((acc, item) => item.quantity + acc, 0);
+  let cart: Cart | null;
+  let totalQuanity: number | undefined;
+  if (user) {
+    cart = await redis.get(`cart-${user.id}`);
+    totalQuanity = cart?.items.reduce((acc, item) => item.quantity + acc, 0);
+  }
 
   return (
     <div className="w-full max-w-7xl mx-auto sm:px-6 lg:px-8 py-5 flex items-center justify-between">

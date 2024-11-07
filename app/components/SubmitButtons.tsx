@@ -40,3 +40,20 @@ export function ShoppingBagButton() {
     </>
   );
 }
+export function DeleteItemButton() {
+  const { pending } = useFormStatus();
+
+  return (
+    <>
+      {pending ? (
+        <Button disabled variant={"link"} className="font-medium text-end">
+          Removing...
+        </Button>
+      ) : (
+        <Button variant={"link"} className="font-medium text-end">
+          Delete
+        </Button>
+      )}
+    </>
+  );
+}
