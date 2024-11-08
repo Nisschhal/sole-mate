@@ -277,6 +277,15 @@ export async function deleteItem(formData: FormData) {
 }
 
 //Checkout Process
+
+/**
+ * 1. Get the User for its id
+ * 2. Get the User's Cart from redis
+ * 3. Check the cart for items and create stripe line_items[] of price_data and its details
+ * 4. Setup the Stripe session with mode: payment, setup, subscribe || line_items || success && cancel url || metadata of userId
+ * 5. return the redirect(session.url)
+ * @returns STRING ==> Redirect URL: success_url || cancel_url
+ */
 export async function checkOut() {
   const { getUser } = getKindeServerSession();
   const user = await getUser();

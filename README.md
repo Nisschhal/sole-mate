@@ -111,8 +111,26 @@ _Note: make sure to use image.imagePattern in next.config.mjs file to make sure 
 
 ### Stripe Implementation
 
-- Create an app/lib/stripe for stripe api key, verstion and typescript
--
+- Create and Initalized an `app/lib/stripe` for _stripe api key, version and typescript_
+- Create a server `checkout()` action in `app/actions.ts`:
+
+  1.  Get the User for its id
+  2.  Get the User's Cart from redis
+  3.  Check the cart for items and create stripe line_items[] of price_data and its details
+  4.  Setup the Stripe session with mode: payment, setup, subscribe || line_items || success && cancel url || metadata of userId
+  5.  return the redirect(session.url)
+
+- Create a webhook in `app/api/stripe/route.ts` for POST request when `session.checkout.complete`
+
+  1.  get the body and signature from the Stripe
+  2.  set up the event with `body, signature, and webhook_secret_key`
+  3.  create a switch for `session.checkout.{complete || cancel || pending}`
+
+      - when session is completed: create new order in db from prisma and delete cart items from redis
+
+  4.  return the response Object: `Response(null, {status:200})`
+
+**_Note: When checkout is triggered in `action.ts` it calls the stripe from `lib/stripe` to initalize the stripe server and upon completion it pass the `success || cancel` url which then triggers the POST request in `api/stripe/route.ts` and provide the feedback of failure or success of `order` creation and `cart` deletion in db_**
 
 #### Learning Outcome:
 

@@ -2,7 +2,16 @@ import prisma from "@/app/lib/db";
 import { redis } from "@/app/lib/redis";
 import { stripe } from "@/app/lib/stripte";
 import { headers } from "next/headers";
-
+/**
+ * 1. get the body and signature from the Stripe
+ * 2. set up the event
+ * 3. create a switch for session.checkout.{complete || cancel || pending}
+ *    - when session is completed: create new order in db from prisma and delete cart items from redis
+ * 4. return the response
+ *
+ * @param req
+ * @returns Object: Response(null, {status:200})
+ */
 export async function POST(req: Request) {
   const body = await req.text();
   const signature = headers().get("Stripe-Signature") as string;
