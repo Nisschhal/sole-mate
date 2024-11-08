@@ -20,6 +20,7 @@ SoleMate is an e-commerce platform designed exclusively for shoe lovers. Discove
 - **Vercel/avatar**: For default user profile
 - **upstash with Redis**: For Serverless Cart Database
 - **Stripe** : For payent process
+- **Recharts** : For chart illustration
 
 # Implementations
 
@@ -131,6 +132,12 @@ _Note: make sure to use image.imagePattern in next.config.mjs file to make sure 
   4.  return the response Object: `Response(null, {status:200})`
 
 **_Note: When checkout is triggered in `action.ts` it calls the stripe from `lib/stripe` to initalize the stripe server and upon completion it pass the `success || cancel` url which then triggers the POST request in `api/stripe/route.ts` and provide the feedback of failure or success of `order` creation and `cart` deletion in db_**
+
+### Rechart
+
+- Install
+- Get the ResponsiveContainer as an Scafold
+-
 
 #### Learning Outcome:
 

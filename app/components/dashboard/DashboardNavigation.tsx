@@ -13,8 +13,6 @@ const DashboardNavigation = () => {
   // get the pathname for the activestyle effect
   const pathname = usePathname();
 
-  console.log(pathname.includes("/products/create"));
-
   return (
     <>
       {links.map((link, index) => (

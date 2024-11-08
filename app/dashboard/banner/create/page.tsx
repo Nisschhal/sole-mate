@@ -95,7 +95,7 @@ const CreateBanner = () => {
                   width={200}
                   src={image}
                   alt="Banner Image"
-                  className="size-100 object-cover rounded-lg border"
+                  className="size-200 object-cover rounded-lg border"
                 />
               ) : (
                 <UploadDropzone
