@@ -28,6 +28,7 @@ import React from "react";
 import ProductDeleteAlert from "@/app/components/ProductDeleteAlert";
 import prisma from "@/app/lib/db";
 import Image from "next/image";
+import { unstable_noStore as noStore } from "next/cache";
 
 const getBanner = async () => {
   const data = await prisma.banner.findMany({
@@ -39,6 +40,8 @@ const getBanner = async () => {
 };
 
 const BannerRoute = async () => {
+  // don't cache this page
+  noStore();
   const banners = await getBanner();
 
   return (

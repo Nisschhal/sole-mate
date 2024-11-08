@@ -14,6 +14,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { unstable_noStore as noStore } from "next/cache";
+
 // get the orders from the db
 async function getData() {
   const data = await prisma.order.findMany({
@@ -39,6 +41,9 @@ async function getData() {
 }
 
 const Orders = async () => {
+  // don't cache this page
+  noStore();
+
   const orders = await getData();
   return (
     <Card>

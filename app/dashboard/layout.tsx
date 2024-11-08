@@ -15,8 +15,12 @@ import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { redirect } from "next/navigation";
 import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { unstable_noStore as noStore } from "next/cache";
 
 const DashboardLayout = async ({ children }: { children: ReactNode }) => {
+  // don't cache this page
+  noStore();
+
   // Get the user from the kinde auth
   const { getUser } = getKindeServerSession();
   // extract the user

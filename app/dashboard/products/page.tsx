@@ -27,6 +27,8 @@ import {
 import { MoreHorizontalIcon, PlusCircle, UserIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { unstable_noStore as noStore } from "next/cache";
+
 // get the product data
 const getProductData = async () => {
   const data = await prisma.product.findMany({
@@ -38,6 +40,8 @@ const getProductData = async () => {
 };
 
 const Products = async () => {
+  // don't cache this page
+  noStore();
   const products = await getProductData();
 
   // delete the product
