@@ -36,5 +36,9 @@ export async function GET() {
   }
 
   // return to the given url, url must be absolute path
-  return NextResponse.redirect("http://localhost:3000");
+  return NextResponse.redirect(
+    process.env.NODE_ENV === "development"
+      ? "http://localhost:3000"
+      : "https://sole-mate-dev-nisal.vercel.app"
+  );
 }
