@@ -9,7 +9,7 @@ export const ourFileRouter = {
   // Define as many FileRoutes as you like, each with a unique routeSlug
   imageUploader: f({ image: { maxFileSize: "4MB", maxFileCount: 10 } })
     // Set permissions and file types for this FileRoute
-    .middleware(async ({ req }) => {
+    .middleware(async () => {
       // get the User function from the kinde auth session
       const { getUser } = getKindeServerSession();
 
@@ -34,7 +34,7 @@ export const ourFileRouter = {
   // Banner Uploader Routes
   bannerUploader: f({ image: { maxFileSize: "4MB", maxFileCount: 1 } })
     // Set permissions and file types for this FileRoute
-    .middleware(async ({ req }) => {
+    .middleware(async () => {
       // get the User function from the kinde auth session
       const { getUser } = getKindeServerSession();
 

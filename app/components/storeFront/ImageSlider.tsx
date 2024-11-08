@@ -13,14 +13,14 @@ export function ImageSlider({ images }: ImagesProps) {
 
   // go to the next image, if last then go to the first image
   function handleNext() {
-    setCurrentImageIndex((prev) =>
+    setCurrentImageIndex(() =>
       currentImageIndex == images.length - 1 ? 0 : currentImageIndex + 1
     );
   }
 
   // Select the previous image, if first then go to the last image
   function handlePrevious() {
-    setCurrentImageIndex((prev) =>
+    setCurrentImageIndex(() =>
       currentImageIndex === 0 ? images.length - 1 : currentImageIndex - 1
     );
   }

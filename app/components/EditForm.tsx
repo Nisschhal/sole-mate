@@ -26,7 +26,7 @@ import toast from "react-hot-toast";
 import SubmitButtons from "./SubmitButtons";
 import { useFormState } from "react-dom";
 import { useState } from "react";
-import { createProduct, editProduct } from "../actions";
+import { editProduct } from "../actions";
 import { productSchema } from "../lib/zodSchema";
 import { parseWithZod } from "@conform-to/zod";
 import { useForm } from "@conform-to/react";
