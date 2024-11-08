@@ -9,6 +9,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
+import Link from "next/link";
 
 interface User {
   email: string;
@@ -33,6 +34,9 @@ export function UserDropdown({ email, name, userImage }: User) {
           <p className="text-xs leading-none text-muted-foreground">{email}</p>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
+        <DropdownMenuItem asChild>
+          <Link href={"/dashboard"}>Dashboard</Link>
+        </DropdownMenuItem>
         <DropdownMenuItem asChild>
           <LogoutLink>Log out</LogoutLink>
         </DropdownMenuItem>

@@ -16,6 +16,7 @@ import { redirect } from "next/navigation";
 import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { unstable_noStore as noStore } from "next/cache";
+import Link from "next/link";
 
 const DashboardLayout = async ({ children }: { children: ReactNode }) => {
   // don't cache this page
@@ -39,40 +40,49 @@ const DashboardLayout = async ({ children }: { children: ReactNode }) => {
           <DashboardNavigation />
         </nav>
 
-        {/* MOBILE: nav */}
-        <Sheet>
-          <SheetTrigger asChild>
-            <Button variant="outline" className="shrink-0 md:hidden ml-auto">
-              <MenuIcon className="size-5" />
-            </Button>
-          </SheetTrigger>
-          <SheetContent side="right">
-            <nav className="flex flex-col gap-6 text-lg font-medium mt-5">
-              <DashboardNavigation />
-            </nav>
-          </SheetContent>
-        </Sheet>
+        <div className="flex items-center gap-2">
+          {/* LOGO */}
+          <Link href={"/"}>
+            <h1 className="text-black font-bold text-xl lg:text-3xl">
+              Sole<span className="text-primary">Mate</span>
+            </h1>
+          </Link>
 
-        {/* AVATAR WITH DROPDOWN: Account  || Logout */}
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="secondary" size="icon" className="rounded-full">
-              <Avatar>
-                <AvatarImage src={user.picture as string} alt="profile pic" />
-                <AvatarFallback>
-                  <CircleUser className="size-5" />
-                </AvatarFallback>
-              </Avatar>
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>My Account</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem asChild className="cursor-pointer">
-              <LogoutLink>Logout</LogoutLink>
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+          {/* MOBILE: nav */}
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button variant="outline" className="shrink-0 md:hidden ml-auto">
+                <MenuIcon className="size-5" />
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right">
+              <nav className="flex flex-col gap-6 text-lg font-medium mt-5">
+                <DashboardNavigation />
+              </nav>
+            </SheetContent>
+          </Sheet>
+
+          {/* AVATAR WITH DROPDOWN: Account  || Logout */}
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="secondary" size="icon" className="rounded-full">
+                <Avatar>
+                  <AvatarImage src={user.picture as string} alt="profile pic" />
+                  <AvatarFallback>
+                    <CircleUser className="size-5" />
+                  </AvatarFallback>
+                </Avatar>
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuLabel>My Account</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem asChild className="cursor-pointer">
+                <LogoutLink>Logout</LogoutLink>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
       </header>
       <main className="my-5">{children}</main>
     </div>
