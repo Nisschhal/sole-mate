@@ -25,7 +25,7 @@ export function ImageSlider({ images }: ImagesProps) {
     );
   }
 
-  function handleSelectImage(index) {
+  function handleSelectImage(index: number) {
     setCurrentImageIndex(index);
   }
   return (
