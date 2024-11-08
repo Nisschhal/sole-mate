@@ -153,7 +153,7 @@
 
 ## Learning Outcomes 📚
 
-Building **SoleMate** provided me, as a beginner, with valuable experience in key technologies and e-commerce functionality.
+Building **SoleMate** provided me, as a full stack developer, with valuable experience in key technologies and e-commerce functionality.
 
 ### Frontend
 
