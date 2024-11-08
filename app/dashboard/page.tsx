@@ -1,13 +1,12 @@
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import {
   Card,
-  CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
 
 import { DashboardStats } from "../components/dashboard/DashboardStats";
+import { RecentSales } from "../components/dashboard/RecentSales";
 
 const Dashboard = () => {
   return (
@@ -27,93 +26,7 @@ const Dashboard = () => {
         </Card>
 
         {/* RIGHT >> RECENT SALES  CARD */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-2xl font-bold">Recent Sales</CardTitle>
-          </CardHeader>
-          <CardContent className="flex flex-col gap-8">
-            {/* Card Content 1 */}
-            <div className="flex items-center gap-4">
-              {/* USER Avatar */}
-              <Avatar className="hidden sm:flex size-9">
-                <AvatarFallback>NP</AvatarFallback>
-              </Avatar>
-              {/* Name && Email  */}
-              <div className="grid ">
-                <p className="text-sm">Rajesh Hamal</p>
-                <p className="text-sm text-muted-foreground">
-                  test123@gmail.com
-                </p>
-              </div>
-              {/* price */}
-              <p className="ml-auto font-medium">+$1,999.00</p>
-            </div>
-            {/* Card Content 2 */}
-            <div className="flex items-center gap-4">
-              {/* USER Avatar */}
-              <Avatar className="hidden sm:flex size-9">
-                <AvatarFallback>NP</AvatarFallback>
-              </Avatar>
-              {/* Name && Email  */}
-              <div className="grid ">
-                <p className="text-sm">Rajesh Hamal</p>
-                <p className="text-sm text-muted-foreground">
-                  test123@gmail.com
-                </p>
-              </div>
-              {/* price */}
-              <p className="ml-auto font-medium">+$1,999.00</p>
-            </div>
-            {/* Card Content 3 */}
-            <div className="flex items-center gap-4">
-              {/* USER Avatar */}
-              <Avatar className="hidden sm:flex size-9">
-                <AvatarFallback>NP</AvatarFallback>
-              </Avatar>
-              {/* Name && Email  */}
-              <div className="grid ">
-                <p className="text-sm">Rajesh Hamal</p>
-                <p className="text-sm text-muted-foreground">
-                  test123@gmail.com
-                </p>
-              </div>
-              {/* price */}
-              <p className="ml-auto font-medium">+$1,999.00</p>
-            </div>
-            {/* Card Content 4 */}
-            <div className="flex items-center gap-4">
-              {/* USER Avatar */}
-              <Avatar className="hidden sm:flex size-9">
-                <AvatarFallback>NP</AvatarFallback>
-              </Avatar>
-              {/* Name && Email  */}
-              <div className="grid ">
-                <p className="text-sm">Rajesh Hamal</p>
-                <p className="text-sm text-muted-foreground">
-                  test123@gmail.com
-                </p>
-              </div>
-              {/* price */}
-              <p className="ml-auto font-medium">+$1,999.00</p>
-            </div>
-            {/* Card Content 5 */}
-            <div className="flex items-center gap-4">
-              {/* USER Avatar */}
-              <Avatar className="hidden sm:flex size-9">
-                <AvatarFallback>NP</AvatarFallback>
-              </Avatar>
-              {/* Name && Email  */}
-              <div className="grid ">
-                <p className="text-sm">Rajesh Hamal</p>
-                <p className="text-sm text-muted-foreground">
-                  test123@gmail.com
-                </p>
-              </div>
-              {/* price */}
-              <p className="ml-auto font-medium">+$1,999.00</p>
-            </div>
-          </CardContent>
-        </Card>
+        <RecentSales />
       </div>
     </>
   );

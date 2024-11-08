@@ -14,6 +14,7 @@ import {
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { redirect } from "next/navigation";
 import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const DashboardLayout = async ({ children }: { children: ReactNode }) => {
   // Get the user from the kinde auth
@@ -52,7 +53,12 @@ const DashboardLayout = async ({ children }: { children: ReactNode }) => {
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="secondary" size="icon" className="rounded-full">
-              <CircleUser className="size-5" />
+              <Avatar>
+                <AvatarImage src={user.picture as string} alt="profile pic" />
+                <AvatarFallback>
+                  <CircleUser className="size-5" />
+                </AvatarFallback>
+              </Avatar>
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
