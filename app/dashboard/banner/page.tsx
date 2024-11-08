@@ -101,11 +101,6 @@ const BannerRoute = async () => {
                             <DropdownMenuLabel>Actions</DropdownMenuLabel>
                             <DropdownMenuSeparator />
                             <DropdownMenuItem asChild>
-                              <Link href={`/dashboard/banner/${123}`}>
-                                Edit
-                              </Link>
-                            </DropdownMenuItem>
-                            <DropdownMenuItem asChild>
                               <ProductDeleteAlert
                                 id={banner.id}
                                 deleteType="banner"
